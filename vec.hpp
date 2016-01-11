@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cstdint>
 #include <stdexcept>
+#include <functional>
 
 template <typename T, size_t i>
 class Vec {
@@ -34,6 +35,12 @@ public:
     T at(void) {
         static_assert(idx < i, "Out of bounds access");
         return data[idx];
+    }
+    template <typename R>
+    Vec<R, i> map(std::function<R(T)> fn) {
+        Vec<R, i> ret;
+        for(uint32_t a = 0; a < i; a++) { ret.data[a] = fn(data[a]); }
+        return ret;
     }
     Vec<T, i> operator+(Vec<T, i>& other) {
         Vec<T, i> ret;
