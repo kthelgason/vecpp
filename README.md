@@ -9,7 +9,7 @@ more operations soon.
 
 ## Usage example
 
-```c++11
+```c++
 
 // Create two vectors of size 3 and 5 respectively, initialized to 0 by default.
 auto v1 = Vec<int, 3>();
