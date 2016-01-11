@@ -15,6 +15,12 @@ public:
             data[a] = other.data[a];
         }
     }
+    Vec(const std::initializer_list<T>& init) {
+        int32_t s = 0;
+        for(auto it = init.begin(); it != init.end() && s < i; s++, it++) {
+            data[s] = *it;
+        }
+    }
     template <size_t j>
     Vec<T, (i + j)> append(Vec<T, j>& other) {
         Vec<T, i+j> ret;
