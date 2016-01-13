@@ -24,8 +24,8 @@ public:
     template <size_t j>
     Vec<T, (i + j)> append(Vec<T, j>& other) {
         Vec<T, i+j> ret;
-        for(uint32_t a = 0; a < i; a++) { ret.data[a] = data[a]; }
-        for(uint32_t a = i; a < i+j; a++) { ret.data[a] = other.data[a-i]; }
+        for(uint32_t a = 0; a < i; a++) { ret[a] = data[a]; }
+        for(uint32_t a = i; a < i+j; a++) { ret[a] = other[a-i]; }
         return ret;
     }
     T& operator[](size_t idx) {
@@ -56,3 +56,4 @@ public:
 private:
     T data[i];
 };
+
