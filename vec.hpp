@@ -28,6 +28,17 @@ public:
         for(uint32_t a = i; a < i+j; a++) { ret[a] = other[a-i]; }
         return ret;
     }
+    bool operator==(const Vec<T, i>& other) const {
+        for(uint32_t a = 0; a < i; a++) {
+            if(data[a] != other[a])
+                return false;
+        }
+        return true;
+    }
+    const T& operator[](size_t idx) const {
+        if(idx > i) throw std::out_of_range("idx");
+        return data[idx];
+    }
     T& operator[](size_t idx) {
         if(idx > i) throw std::out_of_range("idx");
         return data[idx];
@@ -38,7 +49,7 @@ public:
         data[idx] = val;
     }
     template <size_t idx>
-    T at(void) {
+    T at(void) const {
         static_assert(idx < i, "Out of bounds access");
         return data[idx];
     }
@@ -51,6 +62,12 @@ public:
     Vec<T, i> operator+(Vec<T, i>& other) {
         Vec<T, i> ret;
         for(uint32_t a = 0; a < i; a++) { ret.data[a] = other[a] + data[a]; }
+        return ret;
+    }
+    template <typename R, typename V>
+    Vec<T, i> zipWith(Vec<V, i>& other, std::function<R(T,V)> fn) {
+        Vec<T, i> ret;
+        for(uint32_t a = 0; a < i; a++) { ret.data[a] = fn(data[a], other[a]); }
         return ret;
     }
 private:
